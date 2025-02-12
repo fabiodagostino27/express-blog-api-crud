@@ -18,4 +18,10 @@ const show = (req, res) => {
     res.json(post);
 }
 
-module.exports = {index, show};
+const store = (req, res) => res.send("Creazione nuovo post");
+const update = (req, res) => res.send(`Modifica integrale del post: ${req.params.id}`);
+const modify = (req, res) => res.send(`Modifica parziale del post: ${req.params.id}`);
+
+
+
+module.exports = {index, show, store, update, modify};
