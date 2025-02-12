@@ -1,6 +1,14 @@
 const posts = require("../data/postsData");
 
-const index = (req, res) => res.json(posts);
+const index = (req, res) => {
+    let filteredPosts = posts;
+
+    if(req.query.tag) {
+        filteredPosts = posts.filter(post => post.tags.includes(req.query.tag))
+    };
+
+    res.json(filteredPosts);
+};
 
 const show = (req, res) => {
     const id = parseInt(req.params.id);
