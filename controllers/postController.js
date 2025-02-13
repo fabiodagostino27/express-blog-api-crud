@@ -26,7 +26,20 @@ const show = (req, res) => {
     res.json(post);
 }
 
-const store = (req, res) => res.send("Creazione nuovo post");
+const store = (req, res) => {
+    const newId = posts[posts.length - 1].id + 1;;
+    const newPost = {
+        id: newId,
+        title: req.body.title,
+        image: req.body.image,
+        tags: req.body.tags
+    };
+
+    posts.push(newPost);
+    console.log(posts);
+    res.status(201);
+    res.json(newPost);
+}
 const update = (req, res) => res.send(`Modifica integrale del post: ${req.params.id}`);
 const modify = (req, res) => res.send(`Modifica parziale del post: ${req.params.id}`);
 

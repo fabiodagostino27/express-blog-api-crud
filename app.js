@@ -4,6 +4,7 @@ const port = 3000;
 const routerPosts = require("./routers/posts")
 
 app.use(express.static("public"));
+app.use(express.json());
 
 app.get("/", (req, res) => {
     res.send("Hello World!")
