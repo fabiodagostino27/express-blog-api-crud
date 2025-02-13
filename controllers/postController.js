@@ -31,6 +31,7 @@ const store = (req, res) => {
     const newPost = {
         id: newId,
         title: req.body.title,
+        content: req.body.content,
         image: req.body.image,
         tags: req.body.tags
     };
@@ -39,8 +40,29 @@ const store = (req, res) => {
     console.log(posts);
     res.status(201);
     res.json(newPost);
-}
-const update = (req, res) => res.send(`Modifica integrale del post: ${req.params.id}`);
+};
+
+const update = (req, res) => {
+    const id = parseInt(req.params.id);
+    const post = posts.find(post => post.id === id);
+    
+    if (!post) {
+        res.status(404);
+
+        return res.json ({
+            error: "Not Found",
+            message: "Post non trovato"
+        })
+    };
+
+    post.title = req.body.title;
+    post.content = req.body.content;
+    post.image = req.body.image;
+    post.tags = req.body.tags;
+
+    res.json(post);
+};
+
 const modify = (req, res) => res.send(`Modifica parziale del post: ${req.params.id}`);
 
 const destroy = (req, res) => {
