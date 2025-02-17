@@ -7,10 +7,11 @@ const notFound = require("./middlewares/notFound");
 
 app.use(express.static("public"));
 app.use(express.json());
-app.use(notFound);
-app.use(errorsHandler);
 
 app.use("/posts", routerPosts);
+
+app.use(notFound);
+app.use(errorsHandler);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
